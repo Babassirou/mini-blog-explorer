@@ -138,7 +138,7 @@ box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
 }
 
 .filter{
-  position: flex;
+  display: flex;
 }
 
 .Header{
