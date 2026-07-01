@@ -10,9 +10,10 @@ import StatusMessage from "./StatusMessage";
 function App() {
   const [posts, setPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedUserId, setSelectedUserId] = useState("all");
+  const [selectedUserId, setSelectedUserId] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -39,13 +40,15 @@ function App() {
     fetchPosts();
   }, []);
 
+  
+
   const filteredPosts = posts.filter((post) => {
     const search = searchTerm.toLowerCase();
 
     const matchesSearch = post.title.toLowerCase().includes(search) || post.body.toLowerCase().includes(search);
 
     const matchesUser =
-    selectedUserId === "all" || post.userId === Number(selectedUserId);
+    selectedUserId === "" || post.userId === Number(selectedUserId);
     return matchesSearch && matchesUser;
   });
 

@@ -2,6 +2,7 @@
 
 function FilterBar(props) {
   const posts = props.users || [];
+  const userIds = [...new Set(posts.map((post) => post.userId))];
 
   return (
     <select className="FilterBar"
@@ -10,11 +11,14 @@ function FilterBar(props) {
     >
       <option value="">All posts</option>
 
-      {posts.map((item) => (
-        <option key={item.id}>
-          User: {item.userId}
-        </option>
-      ))}
+      {userIds.map((userId) => (
+        <option
+            key={userId}
+            value={userId}
+        >
+        User {userId}
+            </option>
+        ))}
     </select>
   );
 }
