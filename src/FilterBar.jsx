@@ -20,7 +20,9 @@ function FilterBar(props) {
             </option>
         ))}
     </select>
+
   );
+  
 }
 
 export default FilterBar;

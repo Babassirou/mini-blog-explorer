@@ -8,7 +8,7 @@ function StatusMessage(props) {
   }
 
   if (props.posts === 0) {
-    return <p>No posts found.</p>;
+    return <p>No posts found!</p>;
   }
 
   return null;

@@ -13,34 +13,30 @@ function App() {
   const [selectedUserId, setSelectedUserId] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [refresh, setRefresh] = useState(false);
+
+  const fetchPosts = async () => {
+    try {
+      setLoading(true);
+      setError("");
+
+      const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch posts");
+      }
+
+      const data = await response.json();
+      setPosts(data);
+    } catch (error) {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        setLoading(true);
-        setError("");
-
-        const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch posts");
-        }
-
-        const data = await response.json();
-        setPosts(data);
-
-      } catch (error) {
-        setError("Something went wrong. Please try again.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchPosts();
   }, []);
-
-  
 
   const filteredPosts = posts.filter((post) => {
     const search = searchTerm.toLowerCase();
@@ -51,9 +47,19 @@ function App() {
     selectedUserId === "" || post.userId === Number(selectedUserId);
     return matchesSearch && matchesUser;
   });
+  
 
   return (
+    
+    
     <div className="app">
+      <Header className="Header"
+        title="MINI BLOG EXPLORER"
+        subtitle="React Blog API"
+        totalPosts={posts.length}
+      />
+
+      <div className="filter-container">
       <FilterBar
         users={posts}
         selectedUserId={selectedUserId}
@@ -63,11 +69,10 @@ function App() {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
       />
-      <Header
-        title="MINI BLOG EXPLORER"
-        subtitle="React Blog API"
-        totalPosts={posts.length}
-      />
+      <button onClick={fetchPosts}>
+        Refresh Posts
+      </button>
+      </div>
 
      <StatusMessage
       loading={loading}
@@ -75,7 +80,9 @@ function App() {
       posts={filteredPosts.length}
     />
 
+
     <PostGrid className = "cards" posts={filteredPosts}/>
+
 
     </div>
   );
