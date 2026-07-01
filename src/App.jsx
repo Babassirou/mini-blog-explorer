@@ -53,7 +53,8 @@ function App() {
     
     
     <div className="app">
-      <Header className="Header"
+      
+      <Header
         title="MINI BLOG EXPLORER"
         subtitle="React Blog API"
         totalPosts={posts.length}

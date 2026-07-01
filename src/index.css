@@ -140,9 +140,6 @@ box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
 .filter{
   display: flex;
 }
-
-
-
 .PostCard:hover{
  color: rgb(136, 46, 18);
 }
@@ -154,13 +151,16 @@ box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
   box-sizing: border-box;
 }
 
+.PostCard:hover{
+ color: rgb(136, 46, 18);
+}
+
 .Header{
-  color: blue;
-  padding: 20px;
-  border: 1px solid black;
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
-  margin-bottom: 2rem;
- 
+  box-sizing: border-box;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 1rem;
+  background: rgb(76, 76, 218);
+  
 }
 
 
